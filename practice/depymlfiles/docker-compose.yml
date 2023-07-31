@@ -1,0 +1,38 @@
+version: 2
+services:
+  db:
+    image: mysql
+    environment:
+      mysqlhost: localhost
+      mysqlusername: root
+      mysqlpassword: password
+      ports:
+        - 3306:3306
+      volumes:
+        - db:/app/
+      networks:
+        - apinetwork
+  api:
+    build:
+      image:
+      context: ./
+      dockerfile: Dockerfile
+    environment: 
+      mysqlhost: localhost
+      mysqluser: root
+      mysqlpassword: password
+      ports: 
+        - 5008:5008
+      volumes:
+        - ./:/app
+      networks:
+        - apinetwork
+      depends_on: db
+volumes:
+  db
+networks:
+  apinetwork:
+    - driver: bridge
+
+
+

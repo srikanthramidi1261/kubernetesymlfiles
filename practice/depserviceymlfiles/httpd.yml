@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpddep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp-np
+  template:
+    metadata:
+      labels:
+        app: myapp-np
+    spec:
+      containers:
+        - name: httpdcont
+          image: httpd
+          ports:
+            - containerPort: 80    
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpdsvc
+  labels:
+    app: myapp-np
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: myapp-np

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysqldb
+spec:
+  containers:
+    - name: mysqlcont
+      image: mysql:8.0
+      ports:
+        - containerPort: 3306
+
