@@ -1,0 +1,32 @@
+apiVersion: network.k8s.io/v1
+kind: ingress
+metadata:
+  name: ing
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: true
+    nginx.ingress.kubernetes.io/ssl-redirect: false
+spec:
+  ingressClassName: nginx
+  rules:
+    - host:
+      http:
+        paths:
+         - path: /nginx
+           pathType: prefix
+           backend:
+             service:
+               name: ngsvc
+               port:
+                 number: 80
+    - host:
+      http:
+        paths:      
+         - path: /httpd  
+           pathType: prefix
+           backend:
+             service:
+               name: htsvc
+               port:
+                 number: 80       
+
+

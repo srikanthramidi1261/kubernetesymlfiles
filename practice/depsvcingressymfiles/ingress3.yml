@@ -1,0 +1,27 @@
+apiVersion: networking.kubernetes.io/v1
+kind: ingress
+metadata:
+  name: nghting
+  annotations: 
+  nginx.ingress.kubernetes.io/ssl-redirect: false
+  nginx.ingress.kubernetes.io/use-regex: true
+  nginx.ingress.kubernetes.io/rewrite-target: false
+spec:
+  ingressClassName: nginx
+  rules:
+    http:
+      paths:
+        - path: /nginx
+          pathType: prefix
+          backend:
+            service:
+              name: ngsvc
+              port:
+                number: 80
+        - path: /httpd
+          pathType: prefix
+          backend:
+            service:
+              name: htsvc
+              port:
+                number: 80

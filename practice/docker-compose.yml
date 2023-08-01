@@ -1,0 +1,19 @@
+version: 2
+services:
+  db:
+    image: mysql
+    environment:
+      mysqlhost: localhost
+      mysqlusername: root
+      mysqlpassword: password
+    volumes:
+      - db: /app
+    networks:
+      - apinetwork
+  app:
+    build:
+      context: ./
+      docekrfile: Dockerfile
+      environment:
+
+
